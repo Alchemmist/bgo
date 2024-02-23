@@ -1,5 +1,5 @@
 #!/home/alchemmist/code/weather_demo/venv/bin/python3
-from controllers import init_interface, parser, processing_args
+from interface import init_interface, parser, processing_args
 
 
 def main():
@@ -10,4 +10,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

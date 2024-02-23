@@ -6,8 +6,8 @@ def round_json(data: dict):
             data[key] = value
         elif type(value) == dict:
             data[key] = round_json(value)
-        elif type(float) == float:
-                data[key] = round(value)
+        elif type(value) == float:
+            data[key] = round(value)
     return data
 
 

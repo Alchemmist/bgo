@@ -22,7 +22,7 @@ def get_weather_now() -> dict:
     return response
 
 
-def get_weather_next_week() -> dict:
+def get_weather_forecast() -> dict:
     params = config.BASIC_REQUEST_PARAMS.copy()
     params["lat"], params["lon"] = get_coordinates()
     with console.status("Ждём ответ от OpenWeather...", spinner="aesthetic"):

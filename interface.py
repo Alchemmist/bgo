@@ -1,8 +1,8 @@
 import argparse
-from re import fullmatch
-from api import get_weather_next_week, get_weather_now
+from api import get_weather_forecast, get_weather_now
 from utils import round_json
-from view import print_weather_now, print_weather_on_week
+from view import print_weather_forecast_with_time, print_weather_now, print_weather_forecast
+from rich import print
 
 
 parser = argparse.ArgumentParser()
@@ -19,7 +19,8 @@ def init_interface():
                         required=False,
                         nargs=1, 
                         type=int,
-                        default=5,
+                        default=[5],
+                        choices=[1, 2, 3, 4, 5],
                         help='set how long the forecast you want to see (from 1 to 5 days)')
 
     parser.add_argument("--high-precision",
@@ -32,18 +33,36 @@ def init_interface():
                         action="store_true",
                         help='use this field for show all information')
 
+    parser.add_argument("--with-time",
+                        required=False,
+                        action="store_true",
+                        help='use this field for show forecast with time')
+
 
 def processing_args(args: argparse.Namespace):
     if args.command == "now":
         weather_data = get_weather_now()
-        if args.high_precision:
+        if not args.high_precision:
             weather_data = round_json(weather_data)
-        print_weather_now(weather_data, full_info=args.full_info)
-    elif args.command == "week":
-        weather_data = get_weather_next_week()
-        if args.high_precision:
+        
+        if args.full_info:
+            print(weather_data)
+            return 
+
+        print_weather_now(weather_data)
+    elif args.command == "forecast":
+        weather_data = get_weather_forecast()
+        if not args.high_precision:
             weather_data = round_json(weather_data)
-        print_weather_on_week(weather_data, args.days)
+
+        if args.full_info:
+            print(weather_data)
+            return 
+
+        if args.with_time:
+            print_weather_forecast_with_time(weather_data, args.days[0])
+        else:
+            print_weather_forecast(weather_data, args.days[0], args.high_precision)
     else:
         print("Ой, не знаю что делать! Используйте -h, чтобы изучить правила испольования.")
 
