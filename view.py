@@ -42,7 +42,10 @@ def print_weather_forecast_with_time(data: dict, days: int = 5):
     table.add_column("[yellow]Влажность[/]", style="yellow", justify="right",)
 
     last_date = ""
+    count = 0
     for i in range(len(data["list"])):
+        if count == days + 1:
+            break
         date, time = data["list"][i]["dt_txt"].split()
         time = time[:-3]
         temp = str(data["list"][i]["main"]["temp"]) + " °C"
@@ -52,15 +55,17 @@ def print_weather_forecast_with_time(data: dict, days: int = 5):
         if date == last_date:
             date = ""
         else:
+            count += 1
             last_date = date
 
-        table.add_row(
-            date,
-            time,
-            temp,
-            feels_like,
-            humidity,
-        )
+        if count != days + 1:
+            table.add_row(
+                date,
+                time,
+                temp,
+                feels_like,
+                humidity,
+            )
 
     print(table)
 
