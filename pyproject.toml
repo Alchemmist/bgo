@@ -15,21 +15,13 @@ requests = "^2.31.0"
 types-requests = "^2.31.0.20240218"
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.2.0"
-flake8 = "^7.0.0"
 pre-commit = "^3.6.2"
-pyright = "^1.1.351"
+ruff = "==0.0.240"
+mypy = "^1.8.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.black]
+[tool.ruff]
 line-length = 79
-exclude = '''
-    venv/
-    __pycache__/
-    .git
-    media
-    .idea
-'''
