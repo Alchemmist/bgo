@@ -1,7 +1,20 @@
 from datetime import datetime
+from enum import Enum
 from typing import Any
-from weathercli.view import palette
+
 from weathercli.view import asciiart
+
+
+class Palette(Enum):
+    YELLOW = "#FFDB58"
+    WHITE = "#A7C7E7"
+    LIGHT_BLUE = "#4682B4"
+    BLUE = "#1434A4"
+    DARK_BLUE = "#4169E1"
+    DARK_GRAY = "#6a8767"
+    GRAY = "#A9A9A9"
+    LIGHT_GRAY = "#AAAEB1"
+    PURPLE = "#5D3FD3"
 
 
 def select_asciiart_and_color(weather_id: int) -> tuple[str, str]:
@@ -9,32 +22,31 @@ def select_asciiart_and_color(weather_id: int) -> tuple[str, str]:
     time = datetime.now()
 
     if weather_id == 800:
-        return (
-            (asciiart.clear_sunny, palette.YELLOW)
-            if time.replace(hour=6, minute=0)
-            < time
-            < time.replace(hour=19, minute=0)
-            else (asciiart.clear_night, palette.DARK_BLUE)
-        )
+        if time.replace(hour=6, minute=0) < time and time < time.replace(
+            hour=19, minute=0
+        ):
+            return (asciiart.clear_sunny, Palette.YELLOW.value)
+        else:
+            return (asciiart.clear_night, Palette.DARK_BLUE.value)
 
     match weather_type_id:
         case 2:
-            return asciiart.thunderstorm, palette.PURPLE
+            return asciiart.thunderstorm, Palette.PURPLE.value
         case 3:
-            return asciiart.drizzle, palette.LIGHT_BLUE
+            return asciiart.drizzle, Palette.LIGHT_BLUE.value
         case 5:
-            return asciiart.rain, palette.BLUE
+            return asciiart.rain, Palette.BLUE.value
         case 6:
-            return asciiart.snow, palette.WHITE
+            return asciiart.snow, Palette.WHITE.value
         case 7:
-            return asciiart.fog, palette.DARK_GRAY
+            return asciiart.fog, Palette.DARK_GRAY.value
         case 8:
             return (
-                (asciiart.partial_clouds, palette.LIGHT_GRAY)
+                (asciiart.partial_clouds, Palette.LIGHT_GRAY.value)
                 if weather_state_id < 3
-                else (asciiart.clouds, palette.GRAY)
+                else (asciiart.clouds, Palette.GRAY.value)
             )
-    return asciiart.everything_else, palette.LIGHT_GRAY
+    return asciiart.everything_else, Palette.LIGHT_GRAY.value
 
 
 def format_weather(data: dict[str, Any]) -> tuple[str, str, str]:
@@ -50,7 +62,7 @@ def format_weather(data: dict[str, Any]) -> tuple[str, str, str]:
 
     column_inf1 = (
         f"[bold]{datetime.today().strftime('%H:%M %p')}[/bold]\n"
-        f"температура: [bold]{temp}°C[/bold]\n"
+        f"температура: [bold]{temp}°C[/bold] \n"
         f"влажность:  [bold]{humidity}%"
     )
     column_inf2 = (
