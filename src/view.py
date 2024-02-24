@@ -90,10 +90,7 @@ def print_weather_now(data: dict):
 
 def print_weather_forecast_with_time(data: dict, days: int = 5):
     table = Table(
-        # show_edge=False,
         show_header=True, # expand=False,
-        # row_styles=["none", "dim"],
-        # box=box.SIMPLE,
     )
     table.add_column("[green]Дата[/]", style="green")
     table.add_column("[#9ACD32]Время[/]", style="#9ACD32")
@@ -189,3 +186,4 @@ def print_weather_forecast(data: dict, days: int = 5, high_precision: bool = Fal
         )
 
     print(table)
+
