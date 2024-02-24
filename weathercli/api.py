@@ -21,9 +21,7 @@ def error_loginig(func: Callable[[], Any]) -> Callable[[], Any]:
                 console.print_exception(max_frames=1)
             exit()
         except Exception:
-            print(
-                "[b red]Упс! Что-то сломалось, не смог получить координаты[/]"
-            )
+            print("[b red]Упс! Что-то сломалось, не смог получить координаты[/]")
             answer = Prompt.ask(
                 "Хотите посмотреть всю ошибку?",
                 choices=["y", "n"],

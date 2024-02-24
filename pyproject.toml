@@ -18,10 +18,11 @@ types-requests = "^2.31.0.20240218"
 pre-commit = "^3.6.2"
 ruff = "==0.0.240"
 mypy = "^1.8.0"
+black = "^24.2.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
-line-length = 79
+line-length = 88
