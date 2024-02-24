@@ -82,7 +82,7 @@ def print_weather_now(data: dict):
             table,
             title=f"[bold]{location} :sun_behind_small_cloud:[/] ",
             style=f"{select_asciiart_and_color(weather_id)[1]}",
-            width=55,
+            width=60,
             padding=0,
         ),
     )
