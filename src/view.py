@@ -18,12 +18,12 @@ def select_asciiart_and_color(weather_id: int) -> tuple:
         return (
             (asciiart.clear_sunny, palette.YELLOW)
             if time.replace(hour=6, minute=0) < time < time.replace(hour=19, minute=0)
-            else (asciiart.clear_night, palette.DARK_BLUE)
+            else (asciiart.clear_night, palette.PURPLE)
         )
 
     match weather_type_id:
         case 2:
-            return asciiart.thunderstorm, palette.PURPLE
+            return asciiart.thunderstorm, palette.RED
         case 3:
             return asciiart.drizzle, palette.LIGHT_BLUE
         case 5:
@@ -92,17 +92,17 @@ def print_weather_forecast_with_time(data: dict, days: int = 5):
     table = Table(
         show_header=True, # expand=False,
     )
-    table.add_column("[green]Дата[/]", style="green")
-    table.add_column("[#9ACD32]Время[/]", style="#9ACD32")
-    table.add_column("[blue]Температура[/]", style="blue", justify="right")
+    table.add_column(f"[{palette.GREEN}]Дата[/]", style=palette.GREEN)
+    table.add_column(f"[{palette.LIGHT_GREEN}]Время[/]", style=palette.LIGHT_GREEN)
+    table.add_column(f"[{palette.BLUE}]Температура[/]", style=palette.BLUE, justify="right")
     table.add_column(
-        "[cyan]Ощущается как[/]",
-        style="cyan",
+        f"[{palette.WHITE}]Ощущается как[/]",
+        style=palette.WHITE,
         justify="right",
     )
     table.add_column(
-        "[yellow]Влажность[/]",
-        style="yellow",
+        f"[{palette.YELLOW}]Влажность[/]",
+        style=palette.YELLOW,
         justify="right",
     )
 
@@ -141,16 +141,16 @@ def print_weather_forecast(data: dict, days: int = 5, high_precision: bool = Fal
         box=box.SIMPLE,
     )
 
-    table.add_column("[green]Дата[/]", style="green")
-    table.add_column("[blue]Температура[/]", style="blue", justify="right")
+    table.add_column(f"[{palette.GREEN}]Дата[/]", style=palette.GREEN)
+    table.add_column(f"[{palette.BLUE}]Температура[/]", style=palette.BLUE, justify="right")
     table.add_column(
-        "[cyan]Ощущается как[/]",
-        style="cyan",
+        f"[{palette.WHITE}]Ощущается как[/]",
+        style=palette.WHITE,
         justify="right",
     )
     table.add_column(
-        "[yellow]Влажность[/]",
-        style="yellow",
+        f"[{palette.YELLOW}]Влажность[/]",
+        style=palette.YELLOW,
         justify="right",
     )
 
