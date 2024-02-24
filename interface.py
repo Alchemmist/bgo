@@ -1,4 +1,7 @@
 import argparse
+import os
+import config
+from rich.prompt import Prompt
 from api import get_weather_forecast, get_weather_now
 from utils import round_json
 from view import print_weather_forecast_with_time, print_weather_now, print_weather_forecast
@@ -65,4 +68,6 @@ def processing_args(args: argparse.Namespace):
             print_weather_forecast(weather_data, args.days[0], args.high_precision)
     else:
         print("Ой, не знаю что делать! Используйте -h, чтобы изучить правила испольования.")
+
+
 

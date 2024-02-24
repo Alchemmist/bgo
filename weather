@@ -1,9 +1,11 @@
 #!/home/alchemmist/code/weather_demo/venv/bin/python3
+
 from interface import init_interface, parser, processing_args
 
 
 def main():
     init_interface()
+
     args = parser.parse_args()
     processing_args(args)
 
