@@ -12,4 +12,3 @@ BASIC_REQUEST_PARAMS = {
     "appid": OPEN_WEATHER_API_KEY,
     "lang": "ru",
 }
-

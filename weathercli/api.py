@@ -1,27 +1,38 @@
 import config
-from typing import Callable
+from typing import Any, Callable
 from rich.prompt import Prompt
 from rich import print
 from requests import get, exceptions
-from view import console
+from weathercli import console
 
 
-def error_loginig(func: Callable) -> Callable:
-    def wrapper():
+def error_loginig(func: Callable[[], Any]) -> Callable[[], Any]:
+    def wrapper() -> Callable[[], Any]:
         try:
             return func()
         except exceptions.ConnectionError:
             print("[b red]Упс! Проверьте ваше интернет соединение[/]")
-            answer = Prompt.ask("Хотите посмотреть всю ошибку?", choices=["y", "n"], default="n")
+            answer = Prompt.ask(
+                "Хотите посмотреть всю ошибку?",
+                choices=["y", "n"],
+                default="n",
+            )
             if answer == "y":
                 console.print_exception(max_frames=1)
             exit()
         except Exception:
-            print("[b red]Упс! Что-то сломалось, не смог получить координаты[/]")
-            answer = Prompt.ask("Хотите посмотреть всю ошибку?", choices=["y", "n"], default="n")
+            print(
+                "[b red]Упс! Что-то сломалось, не смог получить координаты[/]"
+            )
+            answer = Prompt.ask(
+                "Хотите посмотреть всю ошибку?",
+                choices=["y", "n"],
+                default="n",
+            )
             if answer == "y":
                 console.print_exception(max_frames=1)
             exit()
+
     return wrapper
 
 
@@ -30,7 +41,7 @@ def get_coordinates() -> tuple:
     with console.status("Получаем координаты...", spinner="aesthetic"):
         response = get("http://ipinfo.io/json").json()
     lat = response["loc"].split(",")[0]
-    lon = response["loc"].split(",")[1]    
+    lon = response["loc"].split(",")[1]
     return lat, lon
 
 
@@ -56,4 +67,3 @@ def get_weather_forecast() -> dict:
             params,
         ).json()
     return response
-

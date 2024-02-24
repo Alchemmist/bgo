@@ -1,6 +1,3 @@
-#!/home/alchemmist/.cache/pypoetry/virtualenvs/weather-cli-Nuvw6qni-py3.11/bin/python3
-
-
 from interface import init_interface, parser, processing_args
 
 

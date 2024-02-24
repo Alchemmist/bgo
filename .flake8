@@ -1,3 +1,2 @@
 [flake8]
-exclude = venv,.git,__pycache__,.idea,.vscode,media,__init__.py
-max-line-lenght = 79
+max-line-lenght = 88

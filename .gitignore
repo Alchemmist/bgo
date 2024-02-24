@@ -4,3 +4,4 @@
 venv
 __pycache__
 memory.txt
+.mypy_cache
