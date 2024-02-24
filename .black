@@ -1,0 +1,9 @@
+[tool.black]
+line-lenght = 79
+exclude = '''
+    venv/
+    __pycache__/
+    .git
+    media
+    .idea
+'''
