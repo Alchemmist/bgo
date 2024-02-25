@@ -1,11 +1,13 @@
 [tool.poetry]
-name = "weather-cli"
-version = "0.1.0"
+name = "bgo"
+version = "0.1.4"
 description = "About"
-authors = ["Sexy terminal util to view the weather"]
+authors = ["bog (before going out) is sexy terminal util to view the weather"]
 readme = "README.md"
-packages = [{include = "weathercli"}]
+packages = [{include = "bgo"}]
 
+[tool.poetry.scripts]
+bgo = 'bgo.__main__:main'
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -13,6 +15,7 @@ python-dotenv = "^1.0.1"
 rich = "^13.7.0"
 requests = "^2.31.0"
 types-requests = "^2.31.0.20240218"
+pre-commit = "^3.6.2"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.6.2"

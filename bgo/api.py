@@ -1,9 +1,11 @@
-import config
 from typing import Any, Callable
-from rich.prompt import Prompt
+
+import config
+from requests import exceptions, get
 from rich import print
-from requests import get, exceptions
-from weathercli import console
+from rich.prompt import Prompt
+
+from bgo import console
 
 
 def error_loginig(func: Callable[[], Any]) -> Callable[[], Any]:
@@ -37,7 +39,7 @@ def error_loginig(func: Callable[[], Any]) -> Callable[[], Any]:
 @error_loginig
 def get_coordinates() -> tuple:
     with console.status("Получаем координаты...", spinner="aesthetic"):
-        response = get("http://ipinfo.io/json").json()
+        response = get("http://ipinfo.io/json", timeout=10).json()
     lat = response["loc"].split(",")[0]
     lon = response["loc"].split(",")[1]
     return lat, lon
@@ -49,8 +51,7 @@ def get_weather_now() -> dict:
     params["lat"], params["lon"] = get_coordinates()
     with console.status("Ждём ответ от OpenWeather...", spinner="aesthetic"):
         response = get(
-            "https://api.openweathermap.org/data/2.5/weather",
-            params,
+            "https://api.openweathermap.org/data/2.5/weather", params, timeout=10
         ).json()
     return response
 
@@ -61,7 +62,6 @@ def get_weather_forecast() -> dict:
     params["lat"], params["lon"] = get_coordinates()
     with console.status("Ждём ответ от OpenWeather...", spinner="aesthetic"):
         response = get(
-            "https://api.openweathermap.org/data/2.5/forecast",
-            params,
+            "https://api.openweathermap.org/data/2.5/forecast", params, timeout=10
         ).json()
     return response

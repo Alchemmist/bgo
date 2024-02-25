@@ -1,4 +1,4 @@
-from interface import init_interface, parser, processing_args
+from bgo.interface import init_interface, parser, processing_args
 
 
 def main():

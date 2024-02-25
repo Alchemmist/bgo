@@ -2,7 +2,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any
 
-from weathercli.view import asciiart
+from bgo.view import asciiart
 
 
 class Palette(Enum):

@@ -1,8 +1,10 @@
 from typing import Any
-from rich import print, box
-from rich.table import Table
+
+from rich import box, print
 from rich.panel import Panel
-from weathercli.view.formater import format_weather, select_asciiart_and_color
+from rich.table import Table
+
+from bgo.view.formater import format_weather, select_asciiart_and_color
 
 
 def print_weather_now(data: dict[str, Any]) -> None:
@@ -25,9 +27,7 @@ def print_weather_now(data: dict[str, Any]) -> None:
     )
 
 
-def print_weather_forecast_with_time(
-    data: dict[str, Any], days: int = 5
-) -> None:
+def print_weather_forecast_with_time(data: dict[str, Any], days: int = 5) -> None:
     table = Table(
         show_header=True,  # expand=False,
     )
@@ -112,13 +112,9 @@ def print_weather_forecast(
         last_date = data["list"][j]["dt_txt"].split()[0]
 
         if high_precision:
-            parameters = {
-                k: f"{(v / count):.2f}" for k, v in parameters.items()
-            }
+            parameters = {k: f"{(v / count):.2f}" for k, v in parameters.items()}
         else:
-            parameters = {
-                k: f"{round(v / count)}" for k, v in parameters.items()
-            }
+            parameters = {k: f"{round(v / count)}" for k, v in parameters.items()}
         parameters = {k: str(v) for k, v in parameters.items()}
 
         parameters["temp"] += " °C"

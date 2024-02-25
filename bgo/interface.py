@@ -1,13 +1,14 @@
 import argparse
-from api import get_weather_forecast, get_weather_now
-from utils import round_json
-from weathercli.view.printer import (
-    print_weather_forecast_with_time,
-    print_weather_now,
-    print_weather_forecast,
-)
+
 from rich import print
 
+from bgo.api import get_weather_forecast, get_weather_now
+from bgo.utils import round_json
+from bgo.view.printer import (
+    print_weather_forecast,
+    print_weather_forecast_with_time,
+    print_weather_now,
+)
 
 parser = argparse.ArgumentParser()
 
@@ -77,9 +78,7 @@ def processing_args(args: argparse.Namespace):
         if args.with_time:
             print_weather_forecast_with_time(weather_data, args.days[0])
         else:
-            print_weather_forecast(
-                weather_data, args.days[0], args.high_precision
-            )
+            print_weather_forecast(weather_data, args.days[0], args.high_precision)
     else:
         print(
             "Ой, не знаю что делать! "
