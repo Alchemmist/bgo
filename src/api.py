@@ -3,7 +3,8 @@ from typing import Callable
 from rich.prompt import Prompt
 from rich import print
 from requests import get, exceptions
-from view import console
+from view.formater import console
+
 
 
 def error_loginig(func: Callable) -> Callable:

@@ -1,5 +1,3 @@
-#!/home/alchemmist/code/weather-cli/venv/bin/python3
-
 from interface import init_interface, parser, processing_args
 
 
