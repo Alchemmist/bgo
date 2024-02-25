@@ -1,11 +1,10 @@
 from typing import Any, Callable
 
-import config
 from requests import exceptions, get
 from rich import print
 from rich.prompt import Prompt
 
-from bgo import console
+from bgo import config, console
 
 
 def error_loginig(func: Callable[[], Any]) -> Callable[[], Any]:
