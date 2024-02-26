@@ -1,4 +1,5 @@
 GREEN = "green"
+RED = "red"
 LIGHT_GREEN = "#9ACD32"
 YELLOW = "#FFDB58"
 WHITE = "#A7C7E7"
