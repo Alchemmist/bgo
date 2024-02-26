@@ -12,51 +12,56 @@
         <img alt="Static Badge" src="https://img.shields.io/badge/thanks_for_ascii_art-yellow?style=for-the-badge&link=https%3A%2F%2Fgithub.com%2Faaronrausch%2Fascii-weather%2F" />
     <a />
     <br />
-    <b>Это минималистичная утилита для просмтора погоды прямо в терминале.</b>
+    <b>Before going out</b>
+    <br />
+    <b>a minimalistic utility for viewing the weather directly in the terminal</b>
 </p>
 
 
-# Документация
+# Documentation
 
-[1. Описание](#about)
+[1. Description](#about)
 
-[2. Пример](#example)
+[2. Example](#example)
 
-[3. Использование](#usage)
+[3. Usage](#usage)
 
-[4. Установка](#install)
+[4. Installation](#install)
+
+[5. Development](#dev)
 
 
 <a name="about"/>
 
-# 1. Описание проекта
+# 1. Description
 
- weather-cli - это консаольная утилита для просмтотра погоды на данный момент, а также прогноза на блтжайшее время. Программа обладает приятными и удобным интерфейсов взаимодействия. Утилита работает с двумя API:
- 
- - OpenWeather (для получения данных о погоде)
+weather-cli is a console utility for viewing the weather at the moment, as well as the forecast for the nearest time. The program has pleasant and user-friendly interaction interfaces. The utility works with two APIs:
 
- - IpInfo (для расопознования место положени по IP-адрессу
+- OpenWeather (to get weather data)
 
- Исходный код программы напсан на языке программирования Python, с использованием библиотеки rich для наглядного отображения данных. 
+ - IpInfo (to identify the location by IP address
+
+ The source code of the program is written in the Python programming language, using the rich library for visual display of data.
 
 <a name="example"/>
 
-# 2. Пример 
+# 2. Example
 
-https://github.com/Alchemmist/weather-cli/assets/104511335/bbe5826d-8f14-481a-b119-3d7684e69fc5
+
+https://github.com/Alchemmist/bgo/assets/104511335/f77ff42c-4bf1-4704-bded-3d1078b3bd57
 
 
 <a name="usage" />
 
- # 2. Использование
+ # 3. Usage
  
- У утилиты есть две главные команды: 
+The utility has two main commands:
  ```shell
 python weather.py now
 python weather.py forecast
 ```
 
-`now` - показывает погоду на текущий момет, в следующем формате:
+`now` - shows the current weather in the following format:
 ```
 ╭─────────────────────── Москва 🌤  ────────────────────────╮
 │                                                           │
@@ -67,25 +72,25 @@ python weather.py forecast
 ╰───────────────────────────────────────────────────────────╯
 ```
 
-`forecast` - показывает прогноз погоды в видет таблицы. Есть возможность указать количество дней прогноза (от 1 до 5):
+`forecast` - shows the weather forecast in the form of a table. It is possible to specify the number of forecast days (from 1 to 5):
 ```
 python weather.py forecast -d 3
 ```
-А так же можно посмотреть более детальный прогноз, установив фалг `--with-time`:
+You can also view a more detailed forecast by setting the `--with-time` flag:
 ```
 python weather.py forecast -d 2 --with-time
 ```
 
-Кроме того для обоих команд (now и forecast) можно передавать следоющие флаги:
+In addition, the following flags can be passed for both commands (now and forecast):
 
-- `--high-precision` флаг позволяющий увидеть максимально точные значения всех парметров, без округления
-- `--full-info` флаг лишающий вас, удобного и наглядного отображения, но заато показывающий абсолютно всю информация о погоде, получаемую из API
+- `--high-precision` flag that allows you to see the most accurate values of all parameters, without rounding
+- `--fullinfo` flag deprives you of a convenient and visual display, but it shows absolutely all the weather information received from the API
 
-Вы можмет в любой момент ознакомиться с актуальной документацией по использования, с помощью команды:
+You can review the current usage documentation at any time using the command:
 ```shell
 python src/weather --help
 ```
-Это комнда покажет вам такой (или почти такой) перечень со всеми возможными параметрами:
+This command will show you such (or almost such) a list with all possible parameters:
 ```
 usage: weather [-h] [-d {1,2,3,4,5}] [--high-precision] [--full-info] [--with-time] [command]
 
@@ -103,27 +108,23 @@ options:
 
 <a name="install" />
 
-# 3. Уставновка
-
-Чтобы запусить проект локально выполнитье следющие команды:
+# 4. Installation
+If you have python and pip package manager installed, then just run the command:
 ```shell
-git clone git@github.com:Alchemmist/weather-cli.git
-cd weather-cli
-python -m venv venv
-. ./venv/bin/activate
-pip install -r requirements.txt
+pip install bgo
+bgo
+```
+Done!
+
+<a name="dev" />
+
+# 5. Development
+To run the project locally, run the following commands:
+```shell
+git clone git@github.com:Alchemmist/bgo.git
+cd bgo
+poetry install
+poetry run python bgo -h
 ```
 
-А затем попробуйте запустить:
-```shell
-python src/weather -h
-```
-
-Если никаких ошибок не произошло, то поздравляю, вы успешно запустили проект в локальный среде. Теперь, для удобства использования, вы можете добавить файл `src/weather` в перменную окружения PATH и отредактировать shebang-строку в начали того же файла, прописав там путь до вашей папке venv и до интерпретатора python в ней. 
-
-Если это сделать получилось, можете запусать утилиту одной командой:
-```shell
-weather
-```
-
-Приятного использования!
+If no errors have occurred, then you have successfully launched the project in the local environment. Add functionality, fix bugs and send pull requests
