@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bgo"
-version = "0.1.5"
+version = "0.1.6"
 description = "About"
 authors = ["bog (before going out) is sexy terminal util to view the weather"]
 readme = "README.md"
