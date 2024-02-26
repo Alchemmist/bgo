@@ -9,6 +9,3 @@ def round_json(data: dict):
         elif type(value) == float:
             data[key] = round(value)
     return data
-
-
-
