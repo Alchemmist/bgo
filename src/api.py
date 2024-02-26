@@ -74,33 +74,6 @@ def parse_api_response_now(response: dict) -> dict:
     }
 
 
-"""
-[
-    {
-        "2023.02.12": [
-            {
-                <weather>
-            }, 
-            {
-                <weather>
-            }, 
-            {
-                <weather>
-            }, 
-        ]
-    },
-    {
-        "2023.02.13": [
-            {
-                <weather>
-            },
-            {
-                <weather>
-            }
-        ]
-    },
-]
-"""
 def parse_api_response_forecast(response: dict, days: int, with_time: bool, high_precision: bool) -> list[dict]:
     if with_time: 
         return _parse_forecast_data_with_time(response, days)
