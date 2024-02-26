@@ -6,6 +6,8 @@ from bgo.view import asciiart
 
 
 class Palette(Enum):
+    GREEN = "green"
+    LIGHT_GREEN = "#9ACD32"
     YELLOW = "#FFDB58"
     WHITE = "#A7C7E7"
     LIGHT_BLUE = "#4682B4"
