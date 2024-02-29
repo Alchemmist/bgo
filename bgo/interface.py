@@ -1,14 +1,22 @@
 import argparse
+from typing import Callable
 
 from rich import print
 
-from bgo.api import get_weather_forecast, get_weather_now
+from bgo.api import (
+    get_coordinates,
+    get_weather_forecast,
+    get_weather_now,
+    parse_api_response_now,
+    parse_api_response_forecast,
+)
 from bgo.utils import round_json
 from bgo.view.printer import (
     print_weather_forecast,
     print_weather_forecast_with_time,
     print_weather_now,
 )
+
 
 parser = argparse.ArgumentParser()
 
@@ -55,32 +63,41 @@ def init_interface():
     )
 
 
-def processing_args(args: argparse.Namespace):
+def processing_args(args: argparse.Namespace) -> None:
+    coordinates = get_coordinates()
+
     if args.command == "now":
-        weather_data = get_weather_now()
-        if not args.high_precision:
-            weather_data = round_json(weather_data)
-
-        if args.full_info:
-            print(weather_data)
-            return
-
-        print_weather_now(weather_data)
+        api_response = _command_prepreocessing(
+            api_function=lambda: get_weather_now(coordinates),
+            high_precision=args.high_precision,
+            full_info=args.full_info,
+        )
+        weather = parse_api_response_now(api_response)
+        print_weather_now(weather)
     elif args.command == "forecast":
-        weather_data = get_weather_forecast()
-        if not args.high_precision:
-            weather_data = round_json(weather_data)
+        api_response = _command_prepreocessing(
+            api_function=lambda: get_weather_forecast(coordinates),
+            high_precision=args.high_precision,
+            full_info=args.full_info,
+        )
 
-        if args.full_info:
-            print(weather_data)
-            return
-
-        if args.with_time:
-            print_weather_forecast_with_time(weather_data, args.days[0])
-        else:
-            print_weather_forecast(weather_data, args.days[0], args.high_precision)
+        table_rows = parse_api_response_forecast(
+            api_response, args.days[0], args.with_time, args.high_precision
+        )
+        print_weather_forecast(table_rows, args.with_time)
     else:
         print(
-            "Ой, не знаю что делать! "
-            "Используйте -h, чтобы изучить правила испольования."
+            "Ой, не знаю что делать! Используйте -h, чтобы изучить правила испольования."
         )
+
+
+def _command_prepreocessing(
+    api_function: Callable, high_precision: bool, full_info: bool
+) -> dict:
+    response = api_function()
+    if not high_precision:
+        response = round_json(response)
+    if full_info:
+        print(response)
+        exit(1)
+    return response
